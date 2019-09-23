@@ -179,7 +179,7 @@
             this.BotónCuatro.UseVisualStyleBackColor = true;
             // 
             // BotónIgual
-            // 
+            // Prueba de comentario
             this.BotónIgual.Location = new System.Drawing.Point(195, 318);
             this.BotónIgual.Name = "BotónIgual";
             this.BotónIgual.Size = new System.Drawing.Size(54, 52);
