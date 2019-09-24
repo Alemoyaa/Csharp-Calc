@@ -101,6 +101,11 @@ namespace Calculadora
         {
             textBoxEjercicio.Text = textBoxEjercicio.Text + ",";
         }
+
+        private void BotónIgual_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     public class Expresion
     {
@@ -120,5 +125,6 @@ namespace Calculadora
 
             }
         }
+
     }
 }

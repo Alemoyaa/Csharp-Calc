@@ -176,6 +176,7 @@
             this.BotónIgual.TabIndex = 17;
             this.BotónIgual.Text = "=";
             this.BotónIgual.UseVisualStyleBackColor = true;
+            this.BotónIgual.Click += new System.EventHandler(this.BotónIgual_Click);
             // 
             // BotónTres
             // 
