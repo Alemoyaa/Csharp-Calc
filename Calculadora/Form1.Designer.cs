@@ -93,7 +93,7 @@
             // 
             this.BotónRestar.Location = new System.Drawing.Point(195, 180);
             this.BotónRestar.Name = "BotónRestar";
-            this.BotónRestar.Size = new System.Drawing.Size(54, 52);
+            this.BotónRestar.Size = new System.Drawing.Size(54, 121);
             this.BotónRestar.TabIndex = 9;
             this.BotónRestar.Text = "-";
             this.BotónRestar.UseVisualStyleBackColor = true;
@@ -131,9 +131,9 @@
             // 
             // BotónSuma
             // 
-            this.BotónSuma.Location = new System.Drawing.Point(195, 249);
+            this.BotónSuma.Location = new System.Drawing.Point(195, 318);
             this.BotónSuma.Name = "BotónSuma";
-            this.BotónSuma.Size = new System.Drawing.Size(54, 121);
+            this.BotónSuma.Size = new System.Drawing.Size(54, 120);
             this.BotónSuma.TabIndex = 13;
             this.BotónSuma.Text = "+";
             this.BotónSuma.UseVisualStyleBackColor = true;
