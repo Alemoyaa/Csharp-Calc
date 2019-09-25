@@ -53,7 +53,7 @@
             // lbResultado
             // 
             this.lbResultado.Enabled = false;
-            this.lbResultado.Location = new System.Drawing.Point(12, 18);
+            this.lbResultado.Location = new System.Drawing.Point(12, 21);
             this.lbResultado.MinimumSize = new System.Drawing.Size(150, 20);
             this.lbResultado.Name = "lbResultado";
             this.lbResultado.Size = new System.Drawing.Size(150, 32);
@@ -62,11 +62,12 @@
             // 
             // textBoxEjercicio
             // 
-            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 63);
+            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 65);
             this.textBoxEjercicio.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxEjercicio.Name = "textBoxEjercicio";
-            this.textBoxEjercicio.Size = new System.Drawing.Size(234, 30);
+            this.textBoxEjercicio.Size = new System.Drawing.Size(234, 20);
             this.textBoxEjercicio.TabIndex = 1;
+            this.textBoxEjercicio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             // 
             // BotónDividir
             // 
@@ -76,6 +77,7 @@
             this.BotónDividir.TabIndex = 2;
             this.BotónDividir.Text = "/";
             this.BotónDividir.UseVisualStyleBackColor = true;
+            this.BotónDividir.Click += new System.EventHandler(this.BotónDividir_Click);
             // 
             // BotónMultiplicar
             // 
@@ -85,6 +87,7 @@
             this.BotónMultiplicar.TabIndex = 3;
             this.BotónMultiplicar.Text = "*";
             this.BotónMultiplicar.UseVisualStyleBackColor = true;
+            this.BotónMultiplicar.Click += new System.EventHandler(this.BotónMultiplicar_Click);
             // 
             // BotónRestar
             // 
@@ -94,6 +97,7 @@
             this.BotónRestar.TabIndex = 9;
             this.BotónRestar.Text = "-";
             this.BotónRestar.UseVisualStyleBackColor = true;
+            this.BotónRestar.Click += new System.EventHandler(this.BotónRestar_Click);
             // 
             // BotónNueve
             // 
@@ -103,6 +107,7 @@
             this.BotónNueve.TabIndex = 8;
             this.BotónNueve.Text = "9";
             this.BotónNueve.UseVisualStyleBackColor = true;
+            this.BotónNueve.Click += new System.EventHandler(this.BotónNueve_Click);
             // 
             // BotónOcho
             // 
@@ -112,6 +117,7 @@
             this.BotónOcho.TabIndex = 7;
             this.BotónOcho.Text = "8";
             this.BotónOcho.UseVisualStyleBackColor = true;
+            this.BotónOcho.Click += new System.EventHandler(this.BotónOcho_Click);
             // 
             // BotónSiete
             // 
@@ -121,6 +127,7 @@
             this.BotónSiete.TabIndex = 6;
             this.BotónSiete.Text = "7";
             this.BotónSiete.UseVisualStyleBackColor = true;
+            this.BotónSiete.Click += new System.EventHandler(this.BotónSiete_Click);
             // 
             // BotónSuma
             // 
@@ -130,6 +137,7 @@
             this.BotónSuma.TabIndex = 13;
             this.BotónSuma.Text = "+";
             this.BotónSuma.UseVisualStyleBackColor = true;
+            this.BotónSuma.Click += new System.EventHandler(this.BotónSuma_Click);
             // 
             // BotónSeis
             // 
@@ -139,6 +147,7 @@
             this.BotónSeis.TabIndex = 12;
             this.BotónSeis.Text = "6";
             this.BotónSeis.UseVisualStyleBackColor = true;
+            this.BotónSeis.Click += new System.EventHandler(this.BotónSeis_Click);
             // 
             // BotónCinco
             // 
@@ -148,6 +157,7 @@
             this.BotónCinco.TabIndex = 11;
             this.BotónCinco.Text = "5";
             this.BotónCinco.UseVisualStyleBackColor = true;
+            this.BotónCinco.Click += new System.EventHandler(this.BotónCinco_Click);
             // 
             // BotónCuatro
             // 
@@ -157,15 +167,17 @@
             this.BotónCuatro.TabIndex = 10;
             this.BotónCuatro.Text = "4";
             this.BotónCuatro.UseVisualStyleBackColor = true;
+            this.BotónCuatro.Click += new System.EventHandler(this.BotónCuatro_Click);
             // 
             // BotónIgual
             // 
             this.BotónIgual.Location = new System.Drawing.Point(135, 386);
             this.BotónIgual.Name = "BotónIgual";
-            this.BotónIgual.Size = new System.Drawing.Size(54, 52);
+            this.BotónIgual.Size = new System.Drawing.Size(114, 52);
             this.BotónIgual.TabIndex = 17;
             this.BotónIgual.Text = "=";
             this.BotónIgual.UseVisualStyleBackColor = true;
+            this.BotónIgual.Click += new System.EventHandler(this.BotónIgual_Click);
             // 
             // BotónTres
             // 
@@ -175,6 +187,7 @@
             this.BotónTres.TabIndex = 16;
             this.BotónTres.Text = "3";
             this.BotónTres.UseVisualStyleBackColor = true;
+            this.BotónTres.Click += new System.EventHandler(this.BotónTres_Click);
             // 
             // BotónDos
             // 
@@ -184,6 +197,7 @@
             this.BotónDos.TabIndex = 15;
             this.BotónDos.Text = "2";
             this.BotónDos.UseVisualStyleBackColor = true;
+            this.BotónDos.Click += new System.EventHandler(this.BotónDos_Click);
             // 
             // BotónUno
             // 
@@ -193,6 +207,7 @@
             this.BotónUno.TabIndex = 14;
             this.BotónUno.Text = "1";
             this.BotónUno.UseVisualStyleBackColor = true;
+            this.BotónUno.Click += new System.EventHandler(this.BotónUno_Click);
             // 
             // BotónCerrarParentesis
             // 
@@ -202,6 +217,7 @@
             this.BotónCerrarParentesis.TabIndex = 21;
             this.BotónCerrarParentesis.Text = ")";
             this.BotónCerrarParentesis.UseVisualStyleBackColor = true;
+            this.BotónCerrarParentesis.Click += new System.EventHandler(this.BotónCerrarParentesis_Click);
             // 
             // BotónAbrirParentesis
             // 
@@ -211,6 +227,7 @@
             this.BotónAbrirParentesis.TabIndex = 20;
             this.BotónAbrirParentesis.Text = "(";
             this.BotónAbrirParentesis.UseVisualStyleBackColor = true;
+            this.BotónAbrirParentesis.Click += new System.EventHandler(this.BotónAbrirParentesis_Click);
             // 
             // BotónCero
             // 
@@ -220,6 +237,7 @@
             this.BotónCero.TabIndex = 19;
             this.BotónCero.Text = "0";
             this.BotónCero.UseVisualStyleBackColor = true;
+            this.BotónCero.Click += new System.EventHandler(this.BotónCero_Click);
             // 
             // BotónComa
             // 
@@ -229,6 +247,7 @@
             this.BotónComa.TabIndex = 18;
             this.BotónComa.Text = ",";
             this.BotónComa.UseVisualStyleBackColor = true;
+            this.BotónComa.Click += new System.EventHandler(this.BotónComa_Click);
             // 
             // Calculadora
             // 
@@ -236,6 +255,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(264, 450);
+            this.Controls.Add(this.textBoxEjercicio);
             this.Controls.Add(this.BotónCerrarParentesis);
             this.Controls.Add(this.BotónAbrirParentesis);
             this.Controls.Add(this.BotónCero);
@@ -254,7 +274,6 @@
             this.Controls.Add(this.BotónSiete);
             this.Controls.Add(this.BotónMultiplicar);
             this.Controls.Add(this.BotónDividir);
-            this.Controls.Add(this.textBoxEjercicio);
             this.Controls.Add(this.lbResultado);
             this.MinimumSize = new System.Drawing.Size(280, 489);
             this.Name = "Calculadora";
