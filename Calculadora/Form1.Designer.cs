@@ -48,6 +48,7 @@
             this.BotónAbrirParentesis = new System.Windows.Forms.Button();
             this.BotónCero = new System.Windows.Forms.Button();
             this.BotónComa = new System.Windows.Forms.Button();
+            this.textBoxRespuesta = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lbResultado
@@ -248,12 +249,21 @@
             this.BotónComa.UseVisualStyleBackColor = true;
             this.BotónComa.Click += new System.EventHandler(this.BotónComa_Click);
             // 
+            // textBoxRespuesta
+            // 
+            this.textBoxRespuesta.Location = new System.Drawing.Point(15, 70);
+            this.textBoxRespuesta.MinimumSize = new System.Drawing.Size(150, 30);
+            this.textBoxRespuesta.Name = "textBoxRespuesta";
+            this.textBoxRespuesta.Size = new System.Drawing.Size(235, 20);
+            this.textBoxRespuesta.TabIndex = 22;
+            // 
             // Calculadora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(264, 450);
+            this.Controls.Add(this.textBoxRespuesta);
             this.Controls.Add(this.BotónCerrarParentesis);
             this.Controls.Add(this.BotónAbrirParentesis);
             this.Controls.Add(this.BotónCero);
@@ -304,6 +314,7 @@
         private System.Windows.Forms.Button BotónAbrirParentesis;
         private System.Windows.Forms.Button BotónCero;
         private System.Windows.Forms.Button BotónComa;
+        private System.Windows.Forms.TextBox textBoxRespuesta;
     }
 }
 
