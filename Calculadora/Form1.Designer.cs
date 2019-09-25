@@ -54,7 +54,7 @@
             // lbResultado
             // 
             this.lbResultado.Enabled = false;
-            this.lbResultado.Location = new System.Drawing.Point(12, 9);
+            this.lbResultado.Location = new System.Drawing.Point(12, 21);
             this.lbResultado.MinimumSize = new System.Drawing.Size(150, 20);
             this.lbResultado.Name = "lbResultado";
             this.lbResultado.Size = new System.Drawing.Size(150, 32);
@@ -63,11 +63,12 @@
             // 
             // textBoxEjercicio
             // 
-            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 44);
+            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 65);
             this.textBoxEjercicio.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxEjercicio.Name = "textBoxEjercicio";
-            this.textBoxEjercicio.Size = new System.Drawing.Size(237, 20);
+            this.textBoxEjercicio.Size = new System.Drawing.Size(234, 20);
             this.textBoxEjercicio.TabIndex = 1;
+            this.textBoxEjercicio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             // 
             // BotónDividir
             // 
@@ -93,7 +94,7 @@
             // 
             this.BotónRestar.Location = new System.Drawing.Point(195, 180);
             this.BotónRestar.Name = "BotónRestar";
-            this.BotónRestar.Size = new System.Drawing.Size(54, 52);
+            this.BotónRestar.Size = new System.Drawing.Size(54, 121);
             this.BotónRestar.TabIndex = 9;
             this.BotónRestar.Text = "-";
             this.BotónRestar.UseVisualStyleBackColor = true;
@@ -131,9 +132,9 @@
             // 
             // BotónSuma
             // 
-            this.BotónSuma.Location = new System.Drawing.Point(195, 249);
+            this.BotónSuma.Location = new System.Drawing.Point(195, 318);
             this.BotónSuma.Name = "BotónSuma";
-            this.BotónSuma.Size = new System.Drawing.Size(54, 121);
+            this.BotónSuma.Size = new System.Drawing.Size(54, 120);
             this.BotónSuma.TabIndex = 13;
             this.BotónSuma.Text = "+";
             this.BotónSuma.UseVisualStyleBackColor = true;
@@ -263,7 +264,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(264, 450);
+<<<<<<< HEAD
             this.Controls.Add(this.textBoxRespuesta);
+=======
+            this.Controls.Add(this.textBoxEjercicio);
+>>>>>>> f30a9d0dbaa628d236a595515dbaabdd833c3667
             this.Controls.Add(this.BotónCerrarParentesis);
             this.Controls.Add(this.BotónAbrirParentesis);
             this.Controls.Add(this.BotónCero);
@@ -282,7 +287,6 @@
             this.Controls.Add(this.BotónSiete);
             this.Controls.Add(this.BotónMultiplicar);
             this.Controls.Add(this.BotónDividir);
-            this.Controls.Add(this.textBoxEjercicio);
             this.Controls.Add(this.lbResultado);
             this.MinimumSize = new System.Drawing.Size(280, 489);
             this.Name = "Calculadora";
