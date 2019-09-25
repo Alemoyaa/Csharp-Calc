@@ -17,6 +17,10 @@ namespace Calculadora
             InitializeComponent();
         }
 
+        private void OnKeyDown(object sender, EventArgs e)
+        {
+        }
+
         private void BotónCero_Click(object sender, EventArgs e)
         {
             textBoxEjercicio.Text = textBoxEjercicio.Text + "0";
@@ -106,11 +110,21 @@ namespace Calculadora
         {
 
         }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) // Tendria que ser key no keycode pero no esta
+            {
+                string[] text = textBoxEjercicio.Text.Split('+');
+
+                lbResultado.Text =Convert.ToString(Convert.ToDouble(text[0]) + Convert.ToDouble(text[0]));
+            }
+        }
     }
     public class Expresion
     {
         private static double SubExpressao(double op1, double op2, char sinal)
-        {// esto hace las calculaciones
+        {// esto hace las calculo
             switch (sinal)
             {
                 case '+': return op1 + op2;

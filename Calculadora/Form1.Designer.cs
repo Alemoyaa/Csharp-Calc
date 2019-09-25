@@ -53,7 +53,7 @@
             // lbResultado
             // 
             this.lbResultado.Enabled = false;
-            this.lbResultado.Location = new System.Drawing.Point(12, 9);
+            this.lbResultado.Location = new System.Drawing.Point(12, 21);
             this.lbResultado.MinimumSize = new System.Drawing.Size(150, 20);
             this.lbResultado.Name = "lbResultado";
             this.lbResultado.Size = new System.Drawing.Size(150, 32);
@@ -62,11 +62,12 @@
             // 
             // textBoxEjercicio
             // 
-            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 44);
+            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 65);
             this.textBoxEjercicio.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxEjercicio.Name = "textBoxEjercicio";
-            this.textBoxEjercicio.Size = new System.Drawing.Size(237, 20);
+            this.textBoxEjercicio.Size = new System.Drawing.Size(234, 20);
             this.textBoxEjercicio.TabIndex = 1;
+            this.textBoxEjercicio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             // 
             // BotónDividir
             // 
@@ -254,6 +255,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(264, 450);
+            this.Controls.Add(this.textBoxEjercicio);
             this.Controls.Add(this.BotónCerrarParentesis);
             this.Controls.Add(this.BotónAbrirParentesis);
             this.Controls.Add(this.BotónCero);
@@ -272,7 +274,6 @@
             this.Controls.Add(this.BotónSiete);
             this.Controls.Add(this.BotónMultiplicar);
             this.Controls.Add(this.BotónDividir);
-            this.Controls.Add(this.textBoxEjercicio);
             this.Controls.Add(this.lbResultado);
             this.MinimumSize = new System.Drawing.Size(280, 489);
             this.Name = "Calculadora";
