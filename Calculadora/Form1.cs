@@ -110,7 +110,7 @@ namespace Calculadora
 
         public string Calcular(string texto)
         {
-            double respuestaFinal = Restar(texto);
+            double respuestaFinal = SumarYRestar(texto);
             return respuestaFinal.ToString();
             
         }
@@ -166,6 +166,43 @@ namespace Calculadora
                 }
             }
 
+            for (int i = 1; i < Text.Length; i++)
+            {
+                if (texto[i] == '-' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
+                {
+                    if (texto[i - 1] == '-')
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '+';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i-1, 1);
+                    }
+                    else
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '-';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                }else if (texto[i] == '+' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
+                {
+                    if (texto[i - 1] == '-')
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '-';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                    else
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '+';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                }
+            }
+
             if (texto[0] == '-')
             {
                 texto = '0' + texto;
@@ -180,21 +217,63 @@ namespace Calculadora
             return respuestaPartentesis;
         }
 
-        public double Restar(string textoCalc)
+        public double SumarYRestar(string textoCalc)
         {
             string[] texto = textoCalc.Split('-');
-
-            double total = Suma(texto[0]);
-            for (int i = 1; i < texto.Length; i++)
+            List<string> textList = new List<string>();
+            for (int i = 0; i < texto.Length; i++)
             {
-                total = total - Suma(texto[i]);
+                textList.Add(texto[i]);
+                if (i != texto.Length - 1) { 
+                    textList.Add("-");
+                }
+            }
+
+            for (int i = 0; i < textList.Count; i++)
+            {
+                if (textList[i].Contains('+') && textList[i].Length > 1)
+                {
+                    string [] textPart = textList[i].Split('+');
+
+                    textList.RemoveAt(i);
+                    for (int j = textPart.Length-1; j >= 0 ; j--)
+                    {
+                        textList.Insert(i, textPart[j]);
+                        if (j != 0)
+                        {
+                            textList.Insert(i, "-");
+                        }
+                    }
+                }
+            }
+
+            double total;
+            if (textList[0].Contains('*') || textList[0].Contains('/'))
+            {
+                total = DividirYMultiplicar(textList[0]);
+            }
+            else
+            {
+                total = Convert.ToDouble(textList[0]);
+            }
+            for (int i = 2; i < textList.Count; i+=2)
+            {
+                if (textList[i-1] == "-")
+                {
+                    total = total - DividirYMultiplicar(textList[i]);
+                }
+                else if (textList[i - 1] == "+")
+                {
+                    total = total + DividirYMultiplicar(textList[i]);
+                }
             }
 
             return total;
         }
 
-        private double Suma(string textoCalc)
+        private double DividirYMultiplicar(string textoCalc)
         {
+            /////////
             string[] texto = textoCalc.Split('+');
 
             double total = Multiplicacion(texto[0]);
@@ -209,6 +288,50 @@ namespace Calculadora
         private double Multiplicacion(string textoCalc)
         {
             string[] texto = textoCalc.Split('*');
+            List<string> textList = new List<string>();
+            for (int i = 0; i < texto.Length; i++)
+            {
+                textList.Add(texto[i]);
+                if (i != texto.Length - 1)
+                {
+                    textList.Add("*");
+                }
+            }
+
+            for (int i = 0; i < textList.Count; i++)
+            {
+                if (textList[i].Contains('/') && textList[i].Length > 1)
+                {
+                    string[] textPart = textList[i].Split('/');
+
+                    textList.RemoveAt(i);
+                    for (int j = textPart.Length - 1; j >= 0; j--)
+                    {
+                        textList.Insert(i, textPart[j]);
+                        if (j != 0)
+                        {
+                            textList.Insert(i, "/");
+                        }
+                    }
+                }
+            }
+
+            double total = Convert.ToDouble(textList[0]);
+            for (int i = 2; i < textList.Count; i += 2)
+            {
+                if (textList[i - 1] == "/")
+                {
+                    total = total / Convert.ToDouble(textList[i]);
+                }
+                else if (textList[i - 1] == "*")
+                {
+                    total = total * Convert.ToDouble(textList[i]);
+                }
+            }
+
+            return total;
+            /*
+            string[] texto = textoCalc.Split('*');
 
             double total = Division(texto[0]);
             for (int i = 1; i < texto.Length; i++)
@@ -216,7 +339,7 @@ namespace Calculadora
                 total = total * Division(texto[i]);
             }
 
-            return total;
+            return total;*/
         }
 
         private double Division(string textoCalc)
