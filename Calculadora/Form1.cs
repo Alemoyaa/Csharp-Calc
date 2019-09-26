@@ -110,7 +110,7 @@ namespace Calculadora
 
         public string Calcular(string texto)
         {
-            double respuestaFinal = Restar(texto);
+            double respuestaFinal = RestarYSumar(texto);
             return respuestaFinal.ToString();
             
         }
@@ -140,7 +140,7 @@ namespace Calculadora
             }
 
 
-            for (int i = 0; i < texto.Length; i++)
+            for (int i = 1; i < texto.Length; i++)
             {
                 if (texto[i]=='-' && (texto[i-1]=='*' || texto[i-1] == '/'))
                 {
@@ -166,6 +166,44 @@ namespace Calculadora
                 }
             }
 
+            for (int i = 1; i < texto.Length; i++)
+            {
+                if (texto[i] == '-' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
+                {
+                    if (texto[i - 1] == '-')
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '+';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                    else
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '-';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+
+                }else if(texto[i] == '+' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
+                {
+                    if (texto[i - 1] == '-')
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '-';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                    else
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '+';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                }
+            }
+
             if (texto[0] == '-')
             {
                 texto = '0' + texto;
@@ -180,56 +218,117 @@ namespace Calculadora
             return respuestaPartentesis;
         }
 
-        public double Restar(string textoCalc)
+        public double RestarYSumar(string textoCalc)
         {
             string[] texto = textoCalc.Split('-');
+            List<string> listaTexto = new List<string>();
 
-            double total = Suma(texto[0]);
-            for (int i = 1; i < texto.Length; i++)
+            for (int i = 0; i < texto.Length; i++)
             {
-                total = total - Suma(texto[i]);
+                listaTexto.Add(texto[i]);
+                if (i != texto.Length - 1)
+                {
+                    listaTexto.Add("-");
+                }
+            }
+
+            for (int i = 0; i < listaTexto.Count; i++)
+            {
+                if (listaTexto[i].Contains('+') && listaTexto[i].Length>1)
+                {
+                    string[] parteDelTexto = listaTexto[i].Split('+');
+
+                    listaTexto.RemoveAt(i);
+
+                    for (int j = parteDelTexto.Length-1; j >= 0; j--)
+                    {
+                        listaTexto.Insert(i,parteDelTexto[j]);
+                        if (j!=0)
+                        {
+                            listaTexto.Insert(i,"+");
+                        }
+                    }
+                }
+                
+            }
+
+            double total;
+
+            if (listaTexto[0].Contains('*') || listaTexto[0].Contains('/'))
+            {
+                total = DivisionYMultiplicacion(listaTexto[0]);
+            }
+            else
+            {
+                total = Convert.ToDouble(listaTexto[0]);
+            }
+
+            for (int i = 2; i < listaTexto.Count; i+=2)
+            {
+                if (listaTexto[i - 1] == "-")
+                {
+                    total = total - DivisionYMultiplicacion(listaTexto[i]);
+                }
+                else if (listaTexto[i - 1] == "+")
+                {
+                    total = total + DivisionYMultiplicacion(listaTexto[i]);
+                }
+                
             }
 
             return total;
         }
-
-        private double Suma(string textoCalc)
-        {
-            string[] texto = textoCalc.Split('+');
-
-            double total = Multiplicacion(texto[0]);
-            for (int i = 1; i < texto.Length; i++)
-            {
-                total = total + Multiplicacion(texto[i]);
-            }
-
-            return total;
-        }
-
-        private double Multiplicacion(string textoCalc)
+        
+        private double DivisionYMultiplicacion(string textoCalc)
         {
             string[] texto = textoCalc.Split('*');
+            List<string> listaTexto = new List<string>();
 
-            double total = Division(texto[0]);
-            for (int i = 1; i < texto.Length; i++)
+            for (int i = 0; i < texto.Length; i++)
             {
-                total = total * Division(texto[i]);
+                listaTexto.Add(texto[i]);
+                if (i != texto.Length - 1)
+                {
+                    listaTexto.Add("*");
+                }
+            }
+
+            for (int i = 0; i < listaTexto.Count; i++)
+            {
+                if (listaTexto[i].Contains('/') && listaTexto[i].Length > 1)
+                {
+                    string[] parteDelTexto = listaTexto[i].Split('/');
+
+                    listaTexto.RemoveAt(i);
+
+                    for (int j = parteDelTexto.Length - 1; j >= 0; j--)
+                    {
+                        listaTexto.Insert(i, parteDelTexto[j]);
+                        if (j != 0)
+                        {
+                            listaTexto.Insert(i, "/");
+                        }
+                    }
+                }
+
+            }
+
+            double total = Convert.ToDouble(listaTexto[0]);
+            for (int i = 2; i < listaTexto.Count; i += 2)
+            {
+                if (listaTexto[i - 1] == "/")
+                {
+                    total = total / Convert.ToDouble(listaTexto[i]);
+                }
+                else if (listaTexto[i - 1] == "*")
+                {
+                    total = total * Convert.ToDouble(listaTexto[i]);
+                }
+
             }
 
             return total;
         }
-
-        private double Division(string textoCalc)
-        {
-            string[] texto = textoCalc.Split('/');
-
-            double total = Convert.ToDouble(texto[0]);
-            for (int i = 1; i < texto.Length; i++)
-            {
-                total = total / Convert.ToDouble(texto[i]);
-            }
-
-            return total;
-        }
+        
     }
 }
