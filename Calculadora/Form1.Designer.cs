@@ -60,6 +60,7 @@
             this.textBoxEjercicio.Name = "textBoxEjercicio";
             this.textBoxEjercicio.Size = new System.Drawing.Size(234, 20);
             this.textBoxEjercicio.TabIndex = 1;
+            this.textBoxEjercicio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxEjercicio_KeyDown);
             // 
             // BotónDividir
             // 
@@ -249,7 +250,7 @@
             this.textBoxRespuesta.Location = new System.Drawing.Point(15, 26);
             this.textBoxRespuesta.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxRespuesta.Name = "textBoxRespuesta";
-            this.textBoxRespuesta.Size = new System.Drawing.Size(234, 30);
+            this.textBoxRespuesta.Size = new System.Drawing.Size(234, 21);
             this.textBoxRespuesta.TabIndex = 22;
             this.textBoxRespuesta.Text = "Resultado";
             // 
