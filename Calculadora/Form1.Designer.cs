@@ -54,10 +54,11 @@
             // 
             // textBoxEjercicio
             // 
+            this.textBoxEjercicio.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBoxEjercicio.Location = new System.Drawing.Point(15, 62);
             this.textBoxEjercicio.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxEjercicio.Name = "textBoxEjercicio";
-            this.textBoxEjercicio.Size = new System.Drawing.Size(234, 30);
+            this.textBoxEjercicio.Size = new System.Drawing.Size(234, 20);
             this.textBoxEjercicio.TabIndex = 1;
             // 
             // BotónDividir
@@ -242,7 +243,9 @@
             // 
             // textBoxRespuesta
             // 
+            this.textBoxRespuesta.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxRespuesta.Enabled = false;
+            this.textBoxRespuesta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRespuesta.Location = new System.Drawing.Point(15, 26);
             this.textBoxRespuesta.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxRespuesta.Name = "textBoxRespuesta";
@@ -265,6 +268,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(264, 450);
             this.Controls.Add(this.BotonCE);
             this.Controls.Add(this.textBoxRespuesta);
