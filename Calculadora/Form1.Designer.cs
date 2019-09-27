@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Calculadora));
             this.lbResultado = new System.Windows.Forms.Label();
             this.textBoxEjercicio = new System.Windows.Forms.TextBox();
             this.BotónDividir = new System.Windows.Forms.Button();
@@ -284,6 +285,7 @@
             this.Controls.Add(this.BotónDividir);
             this.Controls.Add(this.textBoxEjercicio);
             this.Controls.Add(this.lbResultado);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(280, 489);
             this.Name = "Calculadora";
             this.Text = "Calculadora";
