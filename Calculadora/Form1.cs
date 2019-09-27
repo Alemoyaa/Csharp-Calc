@@ -67,6 +67,11 @@ namespace Calculadora
             textBoxEjercicio.Text += "9";
         }
 
+        private void BotonCE_Click(object sender, EventArgs e)
+        {
+            textBoxEjercicio.Text = "";
+        }
+
         private void BotónDividir_Click(object sender, EventArgs e)
         {
             textBoxEjercicio.Text += "/";
@@ -329,6 +334,6 @@ namespace Calculadora
 
             return total;
         }
-        
+
     }
 }
