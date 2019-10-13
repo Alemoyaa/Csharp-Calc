@@ -111,7 +111,8 @@ namespace Calculadora
         {
             try
             {
-                textBoxRespuesta.Text = DivisionDeParentesis(textBoxEjercicio.Text);
+                string textoCambiado = CambiarAParentesis(textBoxEjercicio.Text);
+                textBoxRespuesta.Text = DivisionDeParentesis(textoCambiado);
                 textBoxEjercicio.Text = "";
             }
             catch (IndexOutOfRangeException)
@@ -148,7 +149,54 @@ namespace Calculadora
                 return e + "";
             }
         }
-
+        public string CambiarAParentesis(string texto)
+        {
+            while (texto.Contains('{') && texto.Contains('}'))
+            {
+                for (int i = 0; i < texto.Length; i++)
+                {
+                    if (texto[i] == '{')
+                    {
+                        Console.WriteLine(texto);
+                        texto = texto.Remove(i, 1);
+                        texto = texto.Insert((i), "(");
+                        Console.WriteLine(texto);
+                    }
+                    if(texto[i] == '}')
+                    {
+                        Console.WriteLine(texto);
+                        texto = texto.Remove(i, 1);
+                        texto = texto.Insert((i), ")");
+                        Console.WriteLine(texto);
+                        break;
+                    }
+                }
+                break;
+            } 
+            while (texto.Contains('[') && texto.Contains(']'))
+            {
+                for (int i = 0; i < texto.Length; i++)
+                {
+                    if (texto[i] == '[')
+                    {
+                        Console.WriteLine(texto);
+                        texto = texto.Remove(i, 1);
+                        texto = texto.Insert((i), "(");
+                        Console.WriteLine(texto);
+                    }
+                    if (texto[i] == ']')
+                    {
+                        Console.WriteLine(texto);
+                        texto = texto.Remove(i, 1);
+                        texto = texto.Insert((i), ")");
+                        Console.WriteLine(texto);
+                        break;
+                    }
+                }
+                break;
+            }
+            return texto;
+        }
         public string DivisionDeParentesis(string texto)
         {
             try
