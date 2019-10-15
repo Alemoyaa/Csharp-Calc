@@ -310,7 +310,12 @@ namespace Calculadora
         {
             try
             {
-                string respuestaPartentesis = Calcular(texto.Substring(abierto + 1, cerrado - abierto - 1));
+                string textoTemp = texto.Substring(abierto + 1, cerrado - abierto - 1);
+                if(textoTemp[0] == '-')
+                {
+                    textoTemp = '0' + textoTemp;
+                }
+                string respuestaPartentesis = Calcular(textoTemp);
                 return respuestaPartentesis;
             }
             catch (Exception e)
@@ -384,6 +389,7 @@ namespace Calculadora
             }
             catch (Exception e)
             {
+
                 throw;
             }
         }
