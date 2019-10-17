@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Calculadora));
+            this.lbResultado = new System.Windows.Forms.Label();
             this.textBoxEjercicio = new System.Windows.Forms.TextBox();
             this.BotónDividir = new System.Windows.Forms.Button();
             this.BotónMultiplicar = new System.Windows.Forms.Button();
@@ -49,18 +49,25 @@
             this.BotónCero = new System.Windows.Forms.Button();
             this.BotónComa = new System.Windows.Forms.Button();
             this.textBoxRespuesta = new System.Windows.Forms.TextBox();
-            this.BotonCE = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // lbResultado
+            // 
+            this.lbResultado.Enabled = false;
+            this.lbResultado.Location = new System.Drawing.Point(12, 9);
+            this.lbResultado.MinimumSize = new System.Drawing.Size(150, 20);
+            this.lbResultado.Name = "lbResultado";
+            this.lbResultado.Size = new System.Drawing.Size(150, 32);
+            this.lbResultado.TabIndex = 0;
+            this.lbResultado.Text = "Resultado";
             // 
             // textBoxEjercicio
             // 
-            this.textBoxEjercicio.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 62);
+            this.textBoxEjercicio.Location = new System.Drawing.Point(15, 44);
             this.textBoxEjercicio.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxEjercicio.Name = "textBoxEjercicio";
-            this.textBoxEjercicio.Size = new System.Drawing.Size(234, 20);
+            this.textBoxEjercicio.Size = new System.Drawing.Size(237, 20);
             this.textBoxEjercicio.TabIndex = 1;
-            this.textBoxEjercicio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxEjercicio_KeyDown);
             // 
             // BotónDividir
             // 
@@ -84,7 +91,7 @@
             // 
             // BotónRestar
             // 
-            this.BotónRestar.Location = new System.Drawing.Point(195, 249);
+            this.BotónRestar.Location = new System.Drawing.Point(195, 180);
             this.BotónRestar.Name = "BotónRestar";
             this.BotónRestar.Size = new System.Drawing.Size(54, 52);
             this.BotónRestar.TabIndex = 9;
@@ -124,9 +131,9 @@
             // 
             // BotónSuma
             // 
-            this.BotónSuma.Location = new System.Drawing.Point(195, 318);
+            this.BotónSuma.Location = new System.Drawing.Point(195, 249);
             this.BotónSuma.Name = "BotónSuma";
-            this.BotónSuma.Size = new System.Drawing.Size(54, 52);
+            this.BotónSuma.Size = new System.Drawing.Size(54, 121);
             this.BotónSuma.TabIndex = 13;
             this.BotónSuma.Text = "+";
             this.BotónSuma.UseVisualStyleBackColor = true;
@@ -244,34 +251,18 @@
             // 
             // textBoxRespuesta
             // 
-            this.textBoxRespuesta.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxRespuesta.Enabled = false;
-            this.textBoxRespuesta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxRespuesta.Location = new System.Drawing.Point(15, 26);
+            this.textBoxRespuesta.Location = new System.Drawing.Point(15, 70);
             this.textBoxRespuesta.MinimumSize = new System.Drawing.Size(150, 30);
             this.textBoxRespuesta.Name = "textBoxRespuesta";
-            this.textBoxRespuesta.Size = new System.Drawing.Size(234, 21);
+            this.textBoxRespuesta.Size = new System.Drawing.Size(235, 20);
             this.textBoxRespuesta.TabIndex = 22;
-            this.textBoxRespuesta.Text = "Resultado";
-            // 
-            // BotonCE
-            // 
-            this.BotonCE.Location = new System.Drawing.Point(195, 180);
-            this.BotonCE.Name = "BotonCE";
-            this.BotonCE.Size = new System.Drawing.Size(54, 52);
-            this.BotonCE.TabIndex = 23;
-            this.BotonCE.Text = "CE";
-            this.BotonCE.UseVisualStyleBackColor = true;
-            this.BotonCE.Click += new System.EventHandler(this.BotonCE_Click);
             // 
             // Calculadora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(264, 450);
-            this.Controls.Add(this.BotonCE);
             this.Controls.Add(this.textBoxRespuesta);
             this.Controls.Add(this.BotónCerrarParentesis);
             this.Controls.Add(this.BotónAbrirParentesis);
@@ -292,7 +283,7 @@
             this.Controls.Add(this.BotónMultiplicar);
             this.Controls.Add(this.BotónDividir);
             this.Controls.Add(this.textBoxEjercicio);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Controls.Add(this.lbResultado);
             this.MinimumSize = new System.Drawing.Size(280, 489);
             this.Name = "Calculadora";
             this.Text = "Calculadora";
@@ -302,6 +293,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Label lbResultado;
         private System.Windows.Forms.TextBox textBoxEjercicio;
         private System.Windows.Forms.Button BotónDividir;
         private System.Windows.Forms.Button BotónMultiplicar;
@@ -322,7 +315,6 @@
         private System.Windows.Forms.Button BotónCero;
         private System.Windows.Forms.Button BotónComa;
         private System.Windows.Forms.TextBox textBoxRespuesta;
-        private System.Windows.Forms.Button BotonCE;
     }
 }
 
