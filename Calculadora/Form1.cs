@@ -139,14 +139,14 @@ namespace Calculadora
                 }
             }
 
-
+            /*
             for (int i = 1; i < texto.Length; i++)
             {
                 if (texto[i]=='-' && (texto[i-1]=='*' || texto[i-1] == '/'))
                 {
                     for (int j = i-1; j >= 0 ; j--)
                     {
-                        if (texto[j]=='+')
+                        if (texto[j]=='+')// cambio de negativo a positivo
                         {
                             StringBuilder texto1 = new StringBuilder(texto);
                             texto1[j] = '-';
@@ -165,8 +165,8 @@ namespace Calculadora
                     }
                 }
             }
-
-            for (int i = 1; i < texto.Length; i++)
+            */
+            for (int i = 1; i < texto.Length; i++)// si 2--2 cambia a 2+2 o 2-+2 cambia a 2-2
             {
                 if (texto[i] == '-' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
                 {
@@ -203,7 +203,7 @@ namespace Calculadora
                     }
                 }
             }
-
+            
             if (texto[0] == '-')
             {
                 texto = '0' + texto;
@@ -248,7 +248,7 @@ namespace Calculadora
                 }
                 if (i != texto.Length - 1)
                 {
-                    listaTexto.Add("-");
+                    listaTexto.Add("-");//-9*-9 cuando fue cambiado a 9*9 por lo arriba pone un 0-9*9 para hacerlo negativo
                 }
             }
 
@@ -297,10 +297,8 @@ namespace Calculadora
                 else if (listaTexto[i - 1] == "+")
                 {
                     total = total + DivisionYMultiplicacion(listaTexto[i]);
-                }
-                
+                }               
             }
-
             return total;
         }
         
