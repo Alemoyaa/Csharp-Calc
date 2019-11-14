@@ -106,7 +106,6 @@ namespace Calculadora
         private void BotónIgual_Click(object sender, EventArgs e)
         {
             textBoxRespuesta.Text = DivisionDeParentesis(textBoxEjercicio.Text);
-            textBoxEjercicio.Text = "";
         }
 
         public string Calcular(string texto)
@@ -116,20 +115,20 @@ namespace Calculadora
             
         }
     
-        public string DivisionDeParentesis(string texto)
+        public string DivisionDeParentesis(string texto) // si esta con parentesis entra aca primero
         {
             while(texto.Contains('(') && texto.Contains(')'))
             {
                 int abierto = 0;
                 int cerrado = 0;
-
+                
                 for (int i = 0; i < texto.Length; i++)
                 {
-                    if (texto[i] == '(')
+                    if (texto[i] == '(')// guarda la posicion del primer parentesis
                     {
                         abierto = i;
                     }
-                    if (texto[i] == ')')
+                    if (texto[i] == ')')// guarda la posicion del segundo parentesis
                     {
                         cerrado = i;
 
@@ -213,7 +212,7 @@ namespace Calculadora
             return Calcular(texto);
         }
 
-        private string ResolverParentesis(int abierto, int cerrado, string texto)
+        private string ResolverParentesis(int abierto, int cerrado, string texto)// agrega un 0 adelante del - asi no se rompa 
         {
             string textoTemp = texto.Substring(abierto + 1, cerrado - abierto - 1);
             if (textoTemp[0] == '-')
@@ -228,15 +227,21 @@ namespace Calculadora
         {
             for (int i = 1; i < textoCalc.Length; i++)
 			{
-                if(textoCalc[i]=='-' && (textoCalc[i-1]=='*' || textoCalc[i-1]=='/')){
+                if(textoCalc[i]=='-' && (textoCalc[i-1]=='*' || textoCalc[i-1]=='/'))//cambia un numero negativo a positivo y guarda que es negativo
+                {
                     textoCalc = textoCalc.Remove(i, 1);
                     NumNeg = 1;
                 }
-			}
+                if (textoCalc[i] == '-' && textoCalc[i - 1] == '+') // agrega entre +- un cero ej 9+0-9
+                {
+                    textoCalc = textoCalc.Insert(i,"0");
+                }
+            }
+
             string[] texto = textoCalc.Split('-');
             List<string> listaTexto = new List<string>();
 
-            for (int i = 0; i < texto.Length; i++)
+            for (int i = 0; i < texto.Length; i++) // hace el calculo de un positivo y negativo(cambiado a positivo) y despues agrega un negativo
             {
                 if(texto[i]!=""){
                     listaTexto.Add(texto[i]);
@@ -275,6 +280,11 @@ namespace Calculadora
             }
             else
             {
+                if (textoCalc[0]=='+')//-9*-9 --> problem was "","+","9*9" so it removes the empty and puts 0 --> "0","+","9*9"
+                {
+                    listaTexto.Insert(0,"0");
+                    listaTexto.RemoveAt(1);
+                }
                 total = Convert.ToDouble(listaTexto[0]);
             }
 
