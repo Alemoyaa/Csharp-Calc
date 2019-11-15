@@ -12,6 +12,7 @@ namespace Calculadora
 {
     public partial class Calculadora : Form
     {
+        public int NumNeg = 0;
         public Calculadora()
         {
             InitializeComponent();
@@ -67,11 +68,6 @@ namespace Calculadora
             textBoxEjercicio.Text += "9";
         }
 
-        private void BotonCE_Click(object sender, EventArgs e)
-        {
-            textBoxEjercicio.Text = "";
-        }
-
         private void BotónDividir_Click(object sender, EventArgs e)
         {
             textBoxEjercicio.Text += "/";
@@ -109,346 +105,261 @@ namespace Calculadora
 
         private void BotónIgual_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string textoCambiado = CambiarAParentesis(textBoxEjercicio.Text);
-                textBoxRespuesta.Text = DivisionDeParentesis(textoCambiado);
-                textBoxEjercicio.Text = "";
-            }
-            catch (IndexOutOfRangeException)
-            {
-                textBoxRespuesta.Text = "Resultado";
-                textBoxEjercicio.Text = "";
-            }
-            catch (Exception a)
-            {
-                textBoxRespuesta.Text = a + "";
-                textBoxEjercicio.Text = "";
-            }
-        }
-        private void TextBoxEjercicio_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == 13) {
-                BotónIgual_Click(sender, e);
-            }
+            textBoxRespuesta.Text = DivisionDeParentesis(textBoxEjercicio.Text);
         }
 
         public string Calcular(string texto)
         {
-            try
-            {
-                double respuestaFinal = RestarYSumar(texto);
-                return respuestaFinal.ToString();
-            }
-            catch (FormatException e)
-            {
-                return "No es el formato correcto";
-            }
-            catch (Exception e)
-            {
-                return e + "";
-            }
+            double respuestaFinal = RestarYSumar(texto);
+            return respuestaFinal.ToString();
+            
         }
-        public string CambiarAParentesis(string texto)
+    
+        public string DivisionDeParentesis(string texto) // si esta con parentesis entra aca primero
         {
-            while (texto.Contains('{') && texto.Contains('}'))
+            while(texto.Contains('(') && texto.Contains(')'))
             {
+                int abierto = 0;
+                int cerrado = 0;
+                
                 for (int i = 0; i < texto.Length; i++)
                 {
-                    if (texto[i] == '{')
+                    if (texto[i] == '(')// guarda la posicion del primer parentesis
                     {
-                        Console.WriteLine(texto);
-                        texto = texto.Remove(i, 1);
-                        texto = texto.Insert((i), "(");
-                        Console.WriteLine(texto);
+                        abierto = i;
                     }
-                    if(texto[i] == '}')
+                    if (texto[i] == ')')// guarda la posicion del segundo parentesis
                     {
-                        Console.WriteLine(texto);
-                        texto = texto.Remove(i, 1);
-                        texto = texto.Insert((i), ")");
-                        Console.WriteLine(texto);
-                        break;
-                    }
-                }
-                break;
-            } 
-            while (texto.Contains('[') && texto.Contains(']'))
-            {
-                for (int i = 0; i < texto.Length; i++)
-                {
-                    if (texto[i] == '[')
-                    {
-                        Console.WriteLine(texto);
-                        texto = texto.Remove(i, 1);
-                        texto = texto.Insert((i), "(");
-                        Console.WriteLine(texto);
-                    }
-                    if (texto[i] == ']')
-                    {
-                        Console.WriteLine(texto);
-                        texto = texto.Remove(i, 1);
-                        texto = texto.Insert((i), ")");
-                        Console.WriteLine(texto);
-                        break;
-                    }
-                }
-                break;
-            }
-            return texto;
-        }
-        public string DivisionDeParentesis(string texto)
-        {
-            try
-            {
-                while (texto.Contains('(') && texto.Contains(')'))
-                {
-                    int abierto = 0;
-                    int cerrado = 0;
+                        cerrado = i;
 
-                    for (int i = 0; i < texto.Length; i++)
+                        texto = texto.Remove(abierto,cerrado-abierto+1).Insert(abierto, ResolverParentesis(abierto, cerrado, texto)); //borra parentesis y lo remplaza con el resultado de lo que estaba adentro
+
+                        break;
+                    }
+                }
+            }
+
+            /*
+            for (int i = 1; i < texto.Length; i++)
+            {
+                if (texto[i]=='-' && (texto[i-1]=='*' || texto[i-1] == '/'))
+                {
+                    for (int j = i-1; j >= 0 ; j--)
                     {
-                        if (texto[i] == '(')
+                        if (texto[j]=='+')// cambio de negativo a positivo
                         {
-                            abierto = i;
+                            StringBuilder texto1 = new StringBuilder(texto);
+                            texto1[j] = '-';
+                            texto = texto1.ToString();
+                            texto = texto.Remove(i, 1);
+                            break;
                         }
-                        if (texto[i] == ')')
+                        else if (texto[j]=='-')
                         {
-                            cerrado = i;
-
-                            texto = texto.Remove(abierto, cerrado - abierto + 1).Insert(abierto, ResolverParentesis(abierto, cerrado, texto)); //borra parentesis y lo remplaza con el resultado de lo que estaba adentro
-
+                            StringBuilder texto1 = new StringBuilder(texto);
+                            texto1[j] = '+';
+                            texto = texto1.ToString();
+                            texto = texto.Remove(i, 1);
                             break;
                         }
                     }
                 }
-
-
-                for (int i = 1; i < texto.Length; i++)
-                {
-                    if (texto[i] == '-' && (texto[i - 1] == '*' || texto[i - 1] == '/'))
-                    {
-                        for (int j = i - 1; j >= 0; j--)
-                        {
-                            if (texto[j] == '+')
-                            {
-                                StringBuilder texto1 = new StringBuilder(texto);
-                                texto1[j] = '-';
-                                texto = texto1.ToString();
-                                texto = texto.Remove(i, 1);
-                                break;
-                            }
-                            else if (texto[j] == '-')
-                            {
-                                StringBuilder texto1 = new StringBuilder(texto);
-                                texto1[j] = '+';
-                                texto = texto1.ToString();
-                                texto = texto.Remove(i, 1);
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                for (int i = 1; i < texto.Length; i++)
-                {
-                    if (texto[i] == '-' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
-                    {
-                        if (texto[i - 1] == '-')
-                        {
-                            StringBuilder texto1 = new StringBuilder(texto);
-                            texto1[i] = '+';
-                            texto = texto1.ToString();
-                            texto = texto.Remove(i - 1, 1);
-                        }
-                        else
-                        {
-                            StringBuilder texto1 = new StringBuilder(texto);
-                            texto1[i] = '-';
-                            texto = texto1.ToString();
-                            texto = texto.Remove(i - 1, 1);
-                        }
-
-                    }
-                    else if (texto[i] == '+' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
-                    {
-                        if (texto[i - 1] == '-')
-                        {
-                            StringBuilder texto1 = new StringBuilder(texto);
-                            texto1[i] = '-';
-                            texto = texto1.ToString();
-                            texto = texto.Remove(i - 1, 1);
-                        }
-                        else
-                        {
-                            StringBuilder texto1 = new StringBuilder(texto);
-                            texto1[i] = '+';
-                            texto = texto1.ToString();
-                            texto = texto.Remove(i - 1, 1);
-                        }
-                    }
-                }
-
-                if (texto[0] == '-')
-                {
-                    texto = '0' + texto;
-                }
-
-                return Calcular(texto);
             }
-            catch (IndexOutOfRangeException)
+            */
+            for (int i = 1; i < texto.Length; i++)// si 2--2 cambia a 2+2 o 2-+2 cambia a 2-2
             {
-               return  "Resultado";
+                if (texto[i] == '-' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
+                {
+                    if (texto[i - 1] == '-')
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '+';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                    else
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '-';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+
+                }else if(texto[i] == '+' && (texto[i - 1] == '-' || texto[i - 1] == '+'))
+                {
+                    if (texto[i - 1] == '-')
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '-';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                    else
+                    {
+                        StringBuilder texto1 = new StringBuilder(texto);
+                        texto1[i] = '+';
+                        texto = texto1.ToString();
+                        texto = texto.Remove(i - 1, 1);
+                    }
+                }
             }
-            catch (Exception e)
+            
+            if (texto[0] == '-')
             {
-                return e + "";
+                texto = '0' + texto;
             }
+
+            return Calcular(texto);
         }
 
-        private string ResolverParentesis(int abierto, int cerrado, string texto)
+        private string ResolverParentesis(int abierto, int cerrado, string texto)// agrega un 0 adelante del - asi no se rompa 
         {
-            try
+            string textoTemp = texto.Substring(abierto + 1, cerrado - abierto - 1);
+            if (textoTemp[0] == '-')
             {
-                string textoTemp = texto.Substring(abierto + 1, cerrado - abierto - 1);
-                if(textoTemp[0] == '-')
-                {
-                    textoTemp = '0' + textoTemp;
-                }
-                string respuestaPartentesis = Calcular(textoTemp);
-                return respuestaPartentesis;
+                textoTemp = '0' + textoTemp;
             }
-            catch (Exception e)
-            {
-                return e + "";
-                //return "Algo salio mal. Por favor vuelva a intentarlo";
-            }
+            string respuestaPartentesis = Calcular(textoTemp);
+            return respuestaPartentesis;
         }
 
         public double RestarYSumar(string textoCalc)
         {
-            try
-            {
-                string[] texto = textoCalc.Split('-');
-                List<string> listaTexto = new List<string>();
-
-                for (int i = 0; i < texto.Length; i++)
+            for (int i = 1; i < textoCalc.Length; i++)
+			{
+                if(textoCalc[i]=='-' && (textoCalc[i-1]=='*' || textoCalc[i-1]=='/'))//cambia un numero negativo a positivo y guarda que es negativo
                 {
-                    listaTexto.Add(texto[i]);
-                    if (i != texto.Length - 1)
-                    {
-                        listaTexto.Add("-");
-                    }
+                    textoCalc = textoCalc.Remove(i, 1);
+                    NumNeg = 1;
                 }
-
-                for (int i = 0; i < listaTexto.Count; i++)
+                if (textoCalc[i] == '-' && textoCalc[i - 1] == '+') // agrega entre +- un cero ej 9+0-9
                 {
-                    if (listaTexto[i].Contains('+') && listaTexto[i].Length > 1)
+                    textoCalc = textoCalc.Insert(i,"0");
+                }
+            }
+
+            string[] texto = textoCalc.Split('-');
+            List<string> listaTexto = new List<string>();
+
+            for (int i = 0; i < texto.Length; i++) // hace el calculo de un positivo y negativo(cambiado a positivo) y despues agrega un negativo
+            {
+                if(texto[i]!=""){
+                    listaTexto.Add(texto[i]);
+                }
+                if (i != texto.Length - 1)
+                {
+                    listaTexto.Add("-");//-9*-9 cuando fue cambiado a 9*9 por lo arriba pone un 0-9*9 para hacerlo negativo
+                }
+            }
+
+            for (int i = 0; i < listaTexto.Count; i++)
+            {
+                if (listaTexto[i].Contains('+') && listaTexto[i].Length>1)
+                {
+                    string[] parteDelTexto = listaTexto[i].Split('+');
+
+                    listaTexto.RemoveAt(i);
+
+                    for (int j = parteDelTexto.Length-1; j >= 0; j--)
                     {
-                        string[] parteDelTexto = listaTexto[i].Split('+');
-
-                        listaTexto.RemoveAt(i);
-
-                        for (int j = parteDelTexto.Length - 1; j >= 0; j--)
+                        listaTexto.Insert(i,parteDelTexto[j]);
+                        if (j!=0)
                         {
-                            listaTexto.Insert(i, parteDelTexto[j]);
-                            if (j != 0)
-                            {
-                                listaTexto.Insert(i, "+");
-                            }
+                            listaTexto.Insert(i,"+");
                         }
                     }
-
                 }
-
-                double total;
-
-                if (listaTexto[0].Contains('*') || listaTexto[0].Contains('/'))
-                {
-                    total = DivisionYMultiplicacion(listaTexto[0]);
-                }
-                else
-                {
-                    total = Convert.ToDouble(listaTexto[0]);
-                }
-
-                for (int i = 2; i < listaTexto.Count; i += 2)
-                {
-                    if (listaTexto[i - 1] == "-")
-                    {
-                        total = total - DivisionYMultiplicacion(listaTexto[i]);
-                    }
-                    else if (listaTexto[i - 1] == "+")
-                    {
-                        total = total + DivisionYMultiplicacion(listaTexto[i]);
-                    }
-
-                }
-
-                return total;
+                
             }
-            catch (Exception e)
+
+            double total;
+
+            if (listaTexto[0].Contains('*') || listaTexto[0].Contains('/'))
             {
-
-                throw;
+                total = DivisionYMultiplicacion(listaTexto[0]);
             }
-        }
+            else
+            {
+                if (textoCalc[0]=='+')//-9*-9 --> problem was "","+","9*9" so it removes the empty and puts 0 --> "0","+","9*9"
+                {
+                    listaTexto.Insert(0,"0");
+                    listaTexto.RemoveAt(1);
+                }
+                total = Convert.ToDouble(listaTexto[0]);
+            }
 
+            for (int i = 2; i < listaTexto.Count; i+=2)
+            {
+                if (listaTexto[i - 1] == "-")
+                {
+                    total = total - DivisionYMultiplicacion(listaTexto[i]);
+                }
+                else if (listaTexto[i - 1] == "+")
+                {
+                    total = total + DivisionYMultiplicacion(listaTexto[i]);
+                }               
+            }
+            return total;
+        }
+        
         private double DivisionYMultiplicacion(string textoCalc)
         {
-            try {
-                string[] texto = textoCalc.Split('*');
-                List<string> listaTexto = new List<string>();
+            string[] texto = textoCalc.Split('*');
+            List<string> listaTexto = new List<string>();
 
-                for (int i = 0; i < texto.Length; i++)
+            for (int i = 0; i < texto.Length; i++)
+            {
+                listaTexto.Add(texto[i]);
+                if (i != texto.Length - 1)
                 {
-                    listaTexto.Add(texto[i]);
-                    if (i != texto.Length - 1)
-                    {
-                        listaTexto.Add("*");
-                    }
+                    listaTexto.Add("*");
                 }
+            }
 
-                for (int i = 0; i < listaTexto.Count; i++)
+            for (int i = 0; i < listaTexto.Count; i++)
+            {
+                if (listaTexto[i].Contains('/') && listaTexto[i].Length > 1)
                 {
-                    if (listaTexto[i].Contains('/') && listaTexto[i].Length > 1)
+                    string[] parteDelTexto = listaTexto[i].Split('/');
+
+                    listaTexto.RemoveAt(i);
+
+                    for (int j = parteDelTexto.Length - 1; j >= 0; j--)
                     {
-                        string[] parteDelTexto = listaTexto[i].Split('/');
-
-                        listaTexto.RemoveAt(i);
-
-                        for (int j = parteDelTexto.Length - 1; j >= 0; j--)
+                        listaTexto.Insert(i, parteDelTexto[j]);
+                        if (j != 0)
                         {
-                            listaTexto.Insert(i, parteDelTexto[j]);
-                            if (j != 0)
-                            {
-                                listaTexto.Insert(i, "/");
-                            }
+                            listaTexto.Insert(i, "/");
                         }
                     }
-
                 }
 
-                double total = Convert.ToDouble(listaTexto[0]);
-                for (int i = 2; i < listaTexto.Count; i += 2)
-                {
-                    if (listaTexto[i - 1] == "/")
-                    {
-                        total = total / Convert.ToDouble(listaTexto[i]);
-                    }
-                    else if (listaTexto[i - 1] == "*")
-                    {
-                        total = total * Convert.ToDouble(listaTexto[i]);
-                    }
-
-                }
-
-                return total;
             }
-            catch (Exception)
+
+            double total = Convert.ToDouble(listaTexto[0]);
+            for (int i = 2; i < listaTexto.Count; i += 2)
             {
-                throw;
+                if (listaTexto[i - 1] == "/")
+                {
+                    total = total / Convert.ToDouble(listaTexto[i]);
+                    if(NumNeg==1){
+                        total = total*-1;
+                        NumNeg = 0;
+                    }
+                }
+                else if (listaTexto[i - 1] == "*" )
+                {
+                    total = total * Convert.ToDouble(listaTexto[i]);
+                    if(NumNeg==1){
+                        total = total*-1;
+                        NumNeg = 0;
+                    }
+                }
+
             }
+
+            return total;
         }
+        
     }
 }
